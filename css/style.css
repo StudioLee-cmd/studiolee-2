@@ -2273,181 +2273,118 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.6;
 }
 
-/* --- FANCY IMAGE SHAPES --- */
+/* --- IMAGE SHAPE OVERLAYS --- */
 
-/* Circle clip */
-.img-circle {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  overflow: hidden;
-  flex-shrink: 0;
+/* Container for image + shape overlay combo */
+.feature-row-image {
+  position: relative;
 }
 
-.img-circle img {
+/* Shape overlay — sits on top of the feature image, partially overlapping */
+.shape-overlay {
+  position: absolute;
+  overflow: hidden;
+  z-index: 2;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  transition: transform 0.5s var(--ease-out);
+}
+
+.shape-overlay:hover {
+  transform: scale(1.05);
+}
+
+.shape-overlay img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.img-circle--lg {
-  width: 180px;
-  height: 180px;
+/* Circle overlay — bottom-right of parent image */
+.shape-overlay--circle {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  bottom: -20px;
+  right: -20px;
+  border: 4px solid var(--color-bg);
 }
 
-.img-circle--sm {
-  width: 80px;
-  height: 80px;
-}
-
-/* Star shape via clip-path */
-.img-star {
+/* Star overlay — top-left of parent image */
+.shape-overlay--star {
+  width: 140px;
+  height: 140px;
   clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-  width: 140px;
-  height: 140px;
-  overflow: hidden;
+  top: -15px;
+  left: -15px;
 }
 
-.img-star img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Hexagon shape */
-.img-hex {
-  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-  width: 130px;
-  height: 130px;
-  overflow: hidden;
-}
-
-.img-hex img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Diamond shape */
-.img-diamond {
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-  width: 130px;
-  height: 130px;
-  overflow: hidden;
-}
-
-.img-diamond img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Blob shape (organic) */
-.img-blob {
-  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
-  width: 140px;
-  height: 140px;
-  overflow: hidden;
-  transition: clip-path 0.5s var(--ease-out);
-}
-
-.img-blob:hover {
-  clip-path: polygon(20% 5%, 80% 5%, 95% 20%, 95% 80%, 80% 95%, 20% 95%, 5% 80%, 5% 20%);
-}
-
-.img-blob img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Rounded square with accent border */
-.img-rounded-accent {
+/* Hexagon overlay — bottom-left */
+.shape-overlay--hex {
   width: 120px;
   height: 120px;
-  border-radius: 24px;
-  overflow: hidden;
-  border: 3px solid var(--color-accent);
-  flex-shrink: 0;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  bottom: -10px;
+  left: -10px;
 }
 
-.img-rounded-accent img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* Diamond overlay — top-right */
+.shape-overlay--diamond {
+  width: 120px;
+  height: 120px;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  top: -10px;
+  right: -10px;
 }
 
-/* Floating animation for decorative images */
-.img-float {
-  animation: imgFloat 4s ease-in-out infinite;
+/* Rounded square overlay — bottom-right */
+.shape-overlay--rounded {
+  width: 120px;
+  height: 120px;
+  border-radius: 20px;
+  bottom: -15px;
+  right: -15px;
+  border: 4px solid var(--color-bg);
 }
 
-@keyframes imgFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+/* Blob overlay — top-left */
+.shape-overlay--blob {
+  width: 130px;
+  height: 130px;
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+  top: -12px;
+  left: -12px;
 }
 
-/* Spin-in on scroll */
-.img-spin-in {
-  animation: imgSpinIn 0.8s var(--ease-out) forwards;
-}
-
-@keyframes imgSpinIn {
-  from { transform: rotate(-12deg) scale(0.8); opacity: 0; }
-  to { transform: rotate(0) scale(1); opacity: 1; }
-}
-
-/* Glow effect for dark bg images */
-.img-glow {
-  box-shadow: 0 0 30px rgba(37, 99, 235, 0.3);
-  border-radius: 50%;
-}
-
-/* Scattered benefit icons layout */
-.benefits-visual {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-4);
-  justify-content: center;
-  align-items: center;
-  padding: var(--sp-6) 0;
-}
-
-.benefits-visual .img-circle,
-.benefits-visual .img-star,
-.benefits-visual .img-hex,
-.benefits-visual .img-diamond,
-.benefits-visual .img-blob {
-  transition: transform 0.4s var(--ease-out);
-}
-
-.benefits-visual .img-circle:hover,
-.benefits-visual .img-star:hover,
-.benefits-visual .img-hex:hover,
-.benefits-visual .img-diamond:hover,
-.benefits-visual .img-blob:hover {
-  transform: scale(1.1);
-}
-
-/* Staggered delay for scroll-in */
-.benefits-visual > :nth-child(1) { animation-delay: 0s; }
-.benefits-visual > :nth-child(2) { animation-delay: 0.1s; }
-.benefits-visual > :nth-child(3) { animation-delay: 0.2s; }
-.benefits-visual > :nth-child(4) { animation-delay: 0.3s; }
-.benefits-visual > :nth-child(5) { animation-delay: 0.4s; }
-.benefits-visual > :nth-child(6) { animation-delay: 0.5s; }
-
-/* Feature row with shaped image */
-.feature-row-shaped {
-  display: flex;
-  gap: var(--sp-5);
-  align-items: center;
+/* Larger variants */
+.shape-overlay--lg {
+  width: 160px;
+  height: 160px;
 }
 
 @media (max-width: 767px) {
-  .feature-row-shaped {
-    flex-direction: column;
+  .shape-overlay {
+    width: 90px !important;
+    height: 90px !important;
   }
+  .shape-overlay--circle { bottom: -10px; right: -10px; }
+  .shape-overlay--star { top: -8px; left: -8px; }
+  .shape-overlay--hex { bottom: -5px; left: -5px; }
+  .shape-overlay--diamond { top: -5px; right: -5px; }
+}
+
+/* Floating animation for overlays */
+.shape-overlay--float {
+  animation: shapeFloat 4s ease-in-out infinite;
+}
+
+@keyframes shapeFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.shape-overlay--float:hover {
+  animation: none;
+  transform: scale(1.05);
 }
 
 /* Comparison section (side-by-side cards) */
