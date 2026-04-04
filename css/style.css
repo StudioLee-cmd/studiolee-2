@@ -2832,23 +2832,59 @@ h1, h2, h3, h4, h5, h6 {
 
 /* --- LABELS / NICHE GRID --- */
 .labels-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-2);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-4);
 }
 
-.label-link {
-  padding: 0.5rem 1.25rem;
+@media (min-width: 768px) {
+  .labels-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .labels-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.label-card {
+  display: block;
   border: 1px solid var(--color-border);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  overflow: hidden;
+  transition: border-color 0.3s ease, transform 0.3s var(--ease-out), box-shadow 0.3s ease;
 }
 
-.label-link:hover {
-  background-color: var(--color-text);
-  color: var(--color-bg);
-  border-color: var(--color-text);
+.label-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.label-card-image {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: var(--color-surface);
+}
+
+.label-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.label-card:hover .label-card-image img {
+  transform: scale(1.05);
+}
+
+.label-card-name {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: center;
+  background-color: var(--color-white);
 }
 
 /* --- LEGAL PAGE --- */
